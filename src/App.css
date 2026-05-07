@@ -1,0 +1,170 @@
+:root {
+  --bg-primary: #1a1a2e;
+  --bg-secondary: #16213e;
+  --bg-card: rgba(255, 255, 255, 0.05);
+  --text-primary: #e8d5b7;
+  --text-secondary: #c4a97d;
+  --accent-gold: #d4a843;
+  --accent-gold-light: #f0d68a;
+  --accent-red: #c0392b;
+  --accent-red-light: #e74c3c;
+  --line-yang: #e8c547;
+  --line-yin: #7a6a5a;
+  --changing-color: #e74c3c;
+  --font-cn: 'PingFang SC', 'Noto Sans SC', 'Microsoft YaHei', 'Hiragino Sans GB', sans-serif;
+  --font-en: 'Georgia', 'Times New Roman', serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: var(--font-cn);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overscroll-behavior: none;
+}
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(212, 168, 67, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(212, 168, 67, 0.04) 0%, transparent 60%),
+    var(--bg-primary);
+}
+
+/* === Language Toggle === */
+.lang-toggle {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 200;
+  background: rgba(212, 168, 67, 0.08);
+  border: 1px solid rgba(212, 168, 67, 0.35);
+  color: var(--accent-gold);
+  padding: 5px 14px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-family: var(--font-cn);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 1px;
+  backdrop-filter: blur(4px);
+}
+
+.lang-toggle:hover {
+  background: rgba(212, 168, 67, 0.2);
+  border-color: var(--accent-gold);
+}
+
+/* Shared button styles */
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+  color: #1a1a2e;
+  border: none;
+  padding: 16px 48px;
+  font-size: 1.2rem;
+  font-family: var(--font-cn);
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 20px rgba(212, 168, 67, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 30px rgba(212, 168, 67, 0.5);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+  padding: 12px 36px;
+  font-size: 1rem;
+  font-family: var(--font-cn);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: rgba(212, 168, 67, 0.1);
+}
+
+/* === Shared info button + popup (used in DivinationScreen & ResultScreen) === */
+.info-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  border: 1px solid rgba(212, 168, 67, 0.5);
+  background: transparent;
+  color: var(--accent-gold);
+  font-size: 0.68rem;
+  font-family: var(--font-en);
+  font-style: italic;
+  font-weight: 700;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.info-btn:hover {
+  background: rgba(212, 168, 67, 0.15);
+}
+
+.info-popup {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(212, 168, 67, 0.05);
+  border: 1px solid rgba(212, 168, 67, 0.18);
+  border-radius: 10px;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+.screen-enter {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}

@@ -1,0 +1,175 @@
+.start-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100dvh;
+  padding: 20px;
+  gap: 36px;
+}
+
+/* === Taiji Container === */
+.taiji-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.taiji-spin {
+  width: 180px;
+  height: 180px;
+  animation: spinSlow 12s linear infinite;
+  z-index: 2;
+}
+
+.taiji-svg { width: 100%; height: 100%; }
+
+/* === Bagua Ring === */
+.bagua-ring {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
+
+.bagua-trigram {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform: rotate(var(--angle)) translateY(-120px);
+}
+
+.bagua-char {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  transform: translate(-50%, -50%) rotate(calc(-1 * var(--angle)));
+  font-size: 1.6rem;
+  color: var(--accent-gold);
+  opacity: 0.6;
+  transition: opacity 0.3s;
+}
+
+.bagua-char:hover { opacity: 1; }
+
+/* === Title Section === */
+.title-section {
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.3s;
+}
+
+.title-section.visible { opacity: 1; transform: translateY(0); }
+
+.title-cn {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 8px;
+  margin-bottom: 8px;
+  text-shadow: 0 0 40px rgba(212, 168, 67, 0.3);
+}
+
+.subtitle-en {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  font-style: italic;
+  font-family: var(--font-en);
+}
+
+/* === Action Section === */
+.action-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease-out 0.6s;
+}
+
+.action-section.visible { opacity: 1; transform: translateY(0); }
+
+.shake-hint {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  letter-spacing: 1px;
+}
+
+.instructions-toggle {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-cn);
+  font-size: 0.82rem;
+  cursor: pointer;
+  opacity: 0.55;
+  letter-spacing: 1px;
+  transition: opacity 0.2s;
+  padding: 4px 8px;
+}
+
+.instructions-toggle:hover { opacity: 0.9; color: var(--accent-gold); }
+
+/* === Instructions Card === */
+.instructions-card {
+  width: 100%;
+  max-width: 420px;
+  padding: 20px 24px;
+  background: rgba(212, 168, 67, 0.04);
+  border: 1px solid rgba(212, 168, 67, 0.15);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.instructions-principle {
+  font-size: 0.9rem;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.instructions-divider {
+  height: 1px;
+  background: rgba(212, 168, 67, 0.12);
+}
+
+.instructions-label {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 3px;
+  opacity: 0.7;
+  text-transform: uppercase;
+}
+
+.instructions-body {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.85;
+}
+
+/* === Responsive === */
+@media (max-width: 480px) {
+  .taiji-container { width: 220px; height: 220px; }
+  .taiji-spin { width: 140px; height: 140px; }
+  .bagua-char { font-size: 1.3rem; }
+  .bagua-trigram { transform: rotate(var(--angle)) translateY(-95px); }
+  .title-cn { font-size: 2.4rem; letter-spacing: 6px; }
+  .btn-primary { padding: 14px 40px; font-size: 1.1rem; }
+  .instructions-card { padding: 16px 18px; }
+}

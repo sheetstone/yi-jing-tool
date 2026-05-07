@@ -1,0 +1,338 @@
+.result-screen {
+  height: 100dvh;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.result-container {
+  max-width: 600px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 20px 0 60px;
+}
+
+.result-heading {
+  font-size: 1.6rem;
+  color: var(--accent-gold);
+  letter-spacing: 6px;
+  font-weight: 600;
+  text-align: center;
+}
+
+/* === Hexagram Sections === */
+.hexagram-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 30px 20px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid rgba(212, 168, 67, 0.15);
+}
+
+.hexagram-section.transformed {
+  border-color: rgba(122, 106, 90, 0.3);
+}
+
+/* === Hexagram Info === */
+.hexagram-info {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hexagram-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-family: var(--font-en);
+  line-height: 1;
+  text-shadow: 0 0 20px rgba(212, 168, 67, 0.3);
+}
+
+.hexagram-number.secondary {
+  color: var(--text-secondary);
+  font-size: 2.5rem;
+  text-shadow: none;
+}
+
+.hexagram-name-zh {
+  font-size: 2rem;
+  color: var(--accent-gold);
+  letter-spacing: 6px;
+  font-weight: 700;
+}
+
+.hexagram-name-zh.secondary {
+  color: var(--text-secondary);
+}
+
+.hexagram-pinyin {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-family: var(--font-en);
+  font-style: italic;
+}
+
+.hexagram-name-en {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  font-family: var(--font-en);
+  font-style: italic;
+}
+
+/* === Hexagram Diagram === */
+.hexagram-diagram {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.diagram-title {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  letter-spacing: 2px;
+  font-weight: 400;
+}
+
+/* === Judgment Section === */
+.judgment-section {
+  width: 100%;
+  padding: 20px;
+  background: rgba(212, 168, 67, 0.03);
+  border-radius: 12px;
+  border-left: 3px solid var(--accent-gold);
+}
+
+.section-label {
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.judgment-zh {
+  font-size: 1.05rem;
+  color: var(--text-primary);
+  line-height: 1.8;
+  margin-bottom: 10px;
+}
+
+.judgment-en {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  font-family: var(--font-en);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* === Classical Sections (大象, 卜辞, 推断) === */
+.classical-section {
+  width: 100%;
+  padding: 18px 20px;
+  background: rgba(212, 168, 67, 0.02);
+  border-radius: 10px;
+  border: 1px solid rgba(212, 168, 67, 0.08);
+}
+
+.classical-zh {
+  font-size: 0.98rem;
+  color: var(--text-primary);
+  line-height: 1.85;
+  margin-bottom: 8px;
+}
+
+.classical-en {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-family: var(--font-en);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.buci-section {
+  border-left: 3px solid rgba(212, 168, 67, 0.4);
+}
+
+.buci-text {
+  font-size: 1rem;
+  color: var(--accent-gold);
+  opacity: 0.9;
+}
+
+/* === Fortune Tabs === */
+.fortune-tabs-section {
+  width: 100%;
+}
+
+.fortune-tabs {
+  display: flex;
+  gap: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(212, 168, 67, 0.15);
+  margin-bottom: 0;
+}
+
+.fortune-tab {
+  flex: 1;
+  padding: 10px 4px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(212, 168, 67, 0.1);
+  color: var(--text-secondary);
+  font-family: var(--font-cn);
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.25s;
+  letter-spacing: 0.5px;
+}
+
+.fortune-tab:last-child { border-right: none; }
+
+.fortune-tab.active {
+  background: rgba(212, 168, 67, 0.12);
+  color: var(--accent-gold);
+  font-weight: 600;
+}
+
+.fortune-tab:hover:not(.active) {
+  background: rgba(212, 168, 67, 0.05);
+  color: var(--text-primary);
+}
+
+.fortune-content {
+  padding: 18px 20px;
+  background: rgba(212, 168, 67, 0.03);
+  border: 1px solid rgba(212, 168, 67, 0.1);
+  border-top: none;
+  border-radius: 0 0 10px 10px;
+  min-height: 80px;
+}
+
+.fortune-zh {
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  line-height: 1.85;
+  margin-bottom: 8px;
+}
+
+.fortune-en {
+  font-size: 0.84rem;
+  color: var(--text-secondary);
+  font-family: var(--font-en);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+.fortune-empty {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  opacity: 0.5;
+  text-align: center;
+  padding: 10px 0;
+}
+
+/* === Changing Lines === */
+.changing-lines-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.changing-lines-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.changing-lines-header .section-label { margin-bottom: 0; }
+
+.changing-line-card {
+  padding: 20px;
+  background: var(--bg-card);
+  border-radius: 12px;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  border-left: 3px solid var(--changing-color);
+}
+
+.changing-line-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.changing-label {
+  font-size: 1.1rem;
+  color: var(--changing-color);
+  font-weight: 700;
+}
+
+.changing-type {
+  font-size: 0.8rem;
+  color: var(--changing-color);
+  opacity: 0.7;
+  padding: 2px 8px;
+  border: 1px solid rgba(231, 76, 60, 0.3);
+  border-radius: 4px;
+}
+
+.changing-text-zh {
+  font-size: 1rem;
+  color: var(--text-primary);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+.changing-text-en {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  font-family: var(--font-en);
+  font-style: italic;
+  line-height: 1.6;
+}
+
+/* === New Reading Button === */
+.new-reading-btn { margin-top: 20px; }
+
+.fade-in { animation: fadeInUp 0.4s ease-out; }
+
+/* === Responsive === */
+@media (max-width: 480px) {
+  .result-container { gap: 24px; }
+
+  .hexagram-section { padding: 24px 16px; }
+
+  .hexagram-number { font-size: 2.5rem; }
+
+  .hexagram-name-zh {
+    font-size: 1.6rem;
+    letter-spacing: 4px;
+  }
+
+  .judgment-zh { font-size: 0.95rem; }
+
+  .result-heading {
+    font-size: 1.4rem;
+    letter-spacing: 4px;
+  }
+
+  .fortune-tab { font-size: 0.76rem; padding: 9px 2px; }
+}
