@@ -32,6 +32,11 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
 
   const [activeTab, setActiveTab] = useState<FortuneTab>('yunshi');
   const [showChangingInfo, setShowChangingInfo] = useState(false);
+  const [lineActiveTabs, setLineActiveTabs] = useState<Record<number, FortuneTab>>({});
+
+  const getLineTab = (pos: number): FortuneTab => lineActiveTabs[pos] ?? 'yunshi';
+  const setLineTab = (pos: number, tab: FortuneTab) =>
+    setLineActiveTabs(prev => ({ ...prev, [pos]: tab }));
 
   const changingLinePositions = tossLines
     .map((line, i) => (line.isChanging ? i : -1))
@@ -61,7 +66,7 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
             <span className="hexagram-number">{primaryHexagram.number}</span>
             <h3 className="hexagram-name-zh">{primaryHexagram.nameZh}{t('卦', '')}</h3>
             <p className="hexagram-pinyin">{primaryHexagram.pinyin}</p>
-            <p className="hexagram-name-en">{primaryHexagram.nameEn}</p>
+            {lang === 'en' && <p className="hexagram-name-en">{primaryHexagram.nameEn}</p>}
           </div>
 
           <HexagramDiagram
@@ -70,28 +75,26 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
             showChanging={true}
           />
 
-          {/* Judgment (卦辞) */}
+          {/* 卦辞 + 卜辞 supplement */}
           <div className="judgment-section">
             <h4 className="section-label">{t('卦辞', 'Judgment')}</h4>
-            <p className="judgment-zh">{primaryHexagram.judgmentZh}</p>
-            <p className="judgment-en">{primaryHexagram.judgmentEn}</p>
+            {lang === 'zh' && <p className="judgment-zh">{primaryHexagram.judgmentZh}</p>}
+            {lang === 'en' && <p className="judgment-en">{primaryHexagram.judgmentEn}</p>}
+            {primaryHexagram.buci && (
+              <div className="buci-supplement">
+                <span className="buci-supplement-label">{t('卜辞', 'Oracle')}</span>
+                {lang === 'zh' && <p className="buci-supplement-text">{primaryHexagram.buci.zh}</p>}
+                {lang === 'en' && <p className="buci-supplement-text">{primaryHexagram.buci.en}</p>}
+              </div>
+            )}
           </div>
 
           {/* 大象 */}
           {primaryHexagram.daxiang && (
             <div className="classical-section">
               <h4 className="section-label">{t('大象', 'Great Image')}</h4>
-              <p className="classical-zh">{primaryHexagram.daxiang.zh}</p>
-              <p className="classical-en">{primaryHexagram.daxiang.en}</p>
-            </div>
-          )}
-
-          {/* 卜辞 */}
-          {primaryHexagram.buci && (
-            <div className="classical-section buci-section">
-              <h4 className="section-label">{t('卜辞', 'Oracle')}</h4>
-              <p className="classical-zh buci-text">{primaryHexagram.buci.zh}</p>
-              <p className="classical-en">{primaryHexagram.buci.en}</p>
+              {lang === 'zh' && <p className="classical-zh">{primaryHexagram.daxiang.zh}</p>}
+              {lang === 'en' && <p className="classical-en">{primaryHexagram.daxiang.en}</p>}
             </div>
           )}
 
@@ -99,8 +102,8 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
           {primaryHexagram.tuijuan && (
             <div className="classical-section">
               <h4 className="section-label">{t('推断', 'Interpretation')}</h4>
-              <p className="classical-zh">{primaryHexagram.tuijuan.zh}</p>
-              <p className="classical-en">{primaryHexagram.tuijuan.en}</p>
+              {lang === 'zh' && <p className="classical-zh">{primaryHexagram.tuijuan.zh}</p>}
+              {lang === 'en' && <p className="classical-en">{primaryHexagram.tuijuan.en}</p>}
             </div>
           )}
 
@@ -121,8 +124,8 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
               <div className="fortune-content fade-in" key={activeTab}>
                 {activeFortuneData ? (
                   <>
-                    <p className="fortune-zh">{activeFortuneData.zh}</p>
-                    <p className="fortune-en">{activeFortuneData.en}</p>
+                    {lang === 'zh' && <p className="fortune-zh">{activeFortuneData.zh}</p>}
+                    {lang === 'en' && <p className="fortune-en">{activeFortuneData.en}</p>}
                   </>
                 ) : (
                   <p className="fortune-empty">{t('暂无此项内容', 'No data available')}</p>
@@ -154,6 +157,9 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
               const line = primaryHexagram.lines[pos];
               const label = getLineLabel(pos);
               const lineType = getLineType(tossLines[pos].result);
+              const activeLineTab = getLineTab(pos);
+              const activeLineFortuneData = line[activeLineTab as keyof typeof line] as { zh: string; en: string } | undefined;
+              const hasLineFortuneData = FORTUNE_TABS.some(tab => line[tab.key as keyof typeof line]);
 
               return (
                 <div key={pos} className="changing-line-card">
@@ -165,8 +171,46 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
                         : t('老阴 → 阳', 'Old Yin → Yang')}
                     </span>
                   </div>
-                  <p className="changing-text-zh">{line.textZh}</p>
-                  <p className="changing-text-en">{line.textEn}</p>
+
+                  {/* 爻辞 */}
+                  {lang === 'zh' && <p className="changing-text-zh">{line.textZh}</p>}
+                  {lang === 'en' && <p className="changing-text-en">{line.textEn}</p>}
+
+                  {/* 推断 */}
+                  {line.tuijuan && (
+                    <div className="line-tuijuan">
+                      <span className="line-tuijuan-label">{t('推断', 'Interpretation')}</span>
+                      {lang === 'zh' && <p className="line-tuijuan-text">{line.tuijuan.zh}</p>}
+                      {lang === 'en' && <p className="line-tuijuan-text">{line.tuijuan.en}</p>}
+                    </div>
+                  )}
+
+                  {/* Per-line fortune tabs (运势 / 爱情 / 疾病 / 失物 / 诉讼) */}
+                  {hasLineFortuneData && (
+                    <div className="line-fortune-section">
+                      <div className="line-fortune-tabs">
+                        {FORTUNE_TABS.map(tab => (
+                          <button
+                            key={tab.key}
+                            className={`line-fortune-tab ${activeLineTab === tab.key ? 'active' : ''}`}
+                            onClick={() => setLineTab(pos, tab.key)}
+                          >
+                            {t(tab.zh, tab.en)}
+                          </button>
+                        ))}
+                      </div>
+                      <div className="line-fortune-content fade-in" key={`${pos}-${activeLineTab}`}>
+                        {activeLineFortuneData ? (
+                          <>
+                            {lang === 'zh' && <p className="fortune-zh">{activeLineFortuneData.zh}</p>}
+                            {lang === 'en' && <p className="fortune-en">{activeLineFortuneData.en}</p>}
+                          </>
+                        ) : (
+                          <p className="fortune-empty">{t('暂无此项内容', 'No data available')}</p>
+                        )}
+                      </div>
+                    </div>
+                  )}
                 </div>
               );
             })}
@@ -181,7 +225,7 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
               <span className="hexagram-number secondary">{transformedHexagram.number}</span>
               <h3 className="hexagram-name-zh secondary">{transformedHexagram.nameZh}{t('卦', '')}</h3>
               <p className="hexagram-pinyin">{transformedHexagram.pinyin}</p>
-              <p className="hexagram-name-en">{transformedHexagram.nameEn}</p>
+              {lang === 'en' && <p className="hexagram-name-en">{transformedHexagram.nameEn}</p>}
             </div>
 
             <HexagramDiagram
@@ -202,8 +246,8 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
             />
 
             <div className="judgment-section">
-              <p className="judgment-zh">{transformedHexagram.judgmentZh}</p>
-              <p className="judgment-en">{transformedHexagram.judgmentEn}</p>
+              {lang === 'zh' && <p className="judgment-zh">{transformedHexagram.judgmentZh}</p>}
+              {lang === 'en' && <p className="judgment-en">{transformedHexagram.judgmentEn}</p>}
             </div>
           </div>
         )}

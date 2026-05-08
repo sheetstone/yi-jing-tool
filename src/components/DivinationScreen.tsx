@@ -41,6 +41,21 @@ const LINE_TOOLTIP: Record<LineType, { zh: string; en: string }> = {
 const POS_LABEL_ZH = ['初', '二', '三', '四', '五', '上'];
 const POS_LABEL_EN = ['1st', '2nd', '3rd', '4th', '5th', '6th'];
 
+// Coin faces for each toss value: true=yang/乾(heads), false=yin/坤(tails)
+const COIN_FACES: Record<number, [boolean, boolean, boolean]> = {
+  9: [true,  true,  true ],
+  7: [true,  false, false],
+  8: [true,  true,  false],
+  6: [false, false, false],
+};
+
+const COIN_DESC: Record<number, { zh: string; en: string }> = {
+  9: { zh: '三乾 · 变爻', en: '3 heads · changing' },
+  7: { zh: '一乾两坤',     en: '1 head  · 2 tails'  },
+  8: { zh: '两乾一坤',     en: '2 heads · 1 tail'   },
+  6: { zh: '三坤 · 变爻', en: '3 tails · changing' },
+};
+
 export default function DivinationScreen({ onComplete, onBack }: DivinationScreenProps) {
   const [tossLines, setTossLines] = useState<TossLine[]>([]);
   const [isAnimating, setIsAnimating] = useState(false);
@@ -164,11 +179,23 @@ export default function DivinationScreen({ onComplete, onBack }: DivinationScree
               POS_LABEL_ZH[line.tossNumber - 1],
               POS_LABEL_EN[line.tossNumber - 1]
             );
+            const faces = COIN_FACES[info.value];
+            const desc  = COIN_DESC[info.value];
             return (
               <div key={line.tossNumber} className={`history-item ${info.changing ? 'changing' : ''}`}>
-                <span className="history-pos">{posLabel}</span>
-                <span className="history-label">{t(info.labelZh, info.labelEn)}</span>
-                <span className="history-value">{info.value}</span>
+                <div className="history-main">
+                  <span className="history-pos">{posLabel}</span>
+                  <span className="history-label">{t(info.labelZh, info.labelEn)}</span>
+                  <span className="history-value">{info.value}</span>
+                </div>
+                <div className="history-detail">
+                  <span className="history-coins">
+                    {faces.map((isYang, ci) => (
+                      <span key={ci} className={`history-coin ${isYang ? 'yang' : 'yin'}`} />
+                    ))}
+                  </span>
+                  <span className="history-desc">{t(desc.zh, desc.en)}</span>
+                </div>
               </div>
             );
           })}

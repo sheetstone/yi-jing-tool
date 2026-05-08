@@ -32,6 +32,10 @@ export default function CoinToss({ isAnimating, result }: CoinTossProps) {
             !isAnimating && isYang === false ? 'yin'  : '',
           ].filter(Boolean).join(' ');
 
+          const chars = !isAnimating && isYang === false
+            ? ['坤', '坤', '坤', '坤']
+            : ['乾', '乾', '乾', '乾'];
+
           return (
             <div
               key={i}
@@ -39,9 +43,15 @@ export default function CoinToss({ isAnimating, result }: CoinTossProps) {
               style={{ '--i': i } as React.CSSProperties}
             >
               <div className="coin-hole" />
-              <span className="coin-char">
-                {!isAnimating && isYang === false ? '坤' : '乾'}
-              </span>
+              {chars.map((ch, ci) => (
+                <span
+                  key={ci}
+                  className="coin-char"
+                  style={{ transform: `rotate(${ci * 90}deg) translateY(-22px) rotate(${-ci * 90}deg)` } as React.CSSProperties}
+                >
+                  {ch}
+                </span>
+              ))}
             </div>
           );
         })}

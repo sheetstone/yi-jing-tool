@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useShakeDetector } from '../utils/shake';
 import { useLang } from '../contexts/LangContext';
+import BaguaSVG from './BaguaSVG';
 import './StartScreen.css';
 
 interface StartScreenProps {
@@ -10,6 +11,7 @@ interface StartScreenProps {
 export default function StartScreen({ onStart }: StartScreenProps) {
   const [showContent, setShowContent] = useState(false);
   const [showInstructions, setShowInstructions] = useState(false);
+  const [iosShakeReady, setIosShakeReady] = useState(false);
   const { t } = useLang();
 
   useEffect(() => {
@@ -17,34 +19,31 @@ export default function StartScreen({ onStart }: StartScreenProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  useShakeDetector({ threshold: 18, cooldownMs: 1500, onShake: onStart });
+  const { requestPermission } = useShakeDetector({ threshold: 18, cooldownMs: 1500, onShake: onStart });
+
+  useEffect(() => {
+    if (typeof (DeviceMotionEvent as any).requestPermission !== 'function') {
+      // Android / desktop: add listener automatically
+      requestPermission();
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const handleRequestIosShake = async () => {
+    const granted = await requestPermission();
+    if (granted) setIosShakeReady(true);
+  };
+
+  const needsIosPermission =
+    typeof DeviceMotionEvent !== 'undefined' &&
+    typeof (DeviceMotionEvent as any).requestPermission === 'function' &&
+    !iosShakeReady;
 
   return (
     <div className="start-screen screen-enter">
-      {/* Taiji + Bagua */}
+      {/* Bagua */}
       <div className="taiji-container">
-        <div className="taiji-spin">
-          <svg viewBox="0 0 200 200" className="taiji-svg">
-            <circle cx="100" cy="100" r="95" fill="none" stroke="var(--accent-gold)" strokeWidth="2" />
-            <path
-              d="M100 5 A95 95 0 0 1 100 195 A47.5 47.5 0 0 1 100 100 A47.5 47.5 0 0 0 100 5"
-              fill="var(--accent-gold)" opacity="0.9"
-            />
-            <path
-              d="M100 195 A95 95 0 0 1 100 5 A47.5 47.5 0 0 1 100 100 A47.5 47.5 0 0 0 100 195"
-              fill="var(--bg-primary)"
-            />
-            <circle cx="100" cy="52.5" r="14" fill="var(--accent-gold)" />
-            <circle cx="100" cy="147.5" r="14" fill="var(--bg-primary)" />
-          </svg>
-        </div>
-        <div className="bagua-ring">
-          {['☰', '☱', '☲', '☳', '☷', '☶', '☵', '☴'].map((trigram, i) => (
-            <span key={i} className="bagua-trigram" style={{ '--angle': `${i * 45}deg` } as React.CSSProperties}>
-              <span className="bagua-char">{trigram}</span>
-            </span>
-          ))}
-        </div>
+        <BaguaSVG className="bagua-img bagua-spin" />
       </div>
 
       {/* Title */}
@@ -58,7 +57,13 @@ export default function StartScreen({ onStart }: StartScreenProps) {
         <button className="btn-primary" onClick={onStart}>
           {t('开始算卦', 'Begin Divination')}
         </button>
-        <p className="shake-hint">{t('或摇动手机开始', 'or shake your phone to begin')}</p>
+        {needsIosPermission ? (
+          <button className="shake-hint shake-hint-btn" onClick={handleRequestIosShake}>
+            {t('点此开启摇动功能', 'Tap to enable shake')}
+          </button>
+        ) : (
+          <p className="shake-hint">{t('或摇动手机开始', 'or shake your phone to begin')}</p>
+        )}
 
         {/* Instructions toggle */}
         <button className="instructions-toggle" onClick={() => setShowInstructions(s => !s)}>

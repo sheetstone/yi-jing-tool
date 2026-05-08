@@ -12,68 +12,92 @@
   height: 90px;
 }
 
-/* === Coin base === */
+/* === Coin base (traditional 铜钱 style) === */
 .coin {
-  width: 72px;
-  height: 72px;
+  width: 76px;
+  height: 76px;
   border-radius: 50%;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  /* Default / neutral: gold (shown before first toss) */
-  background: radial-gradient(circle at 38% 35%, #f5d870, var(--accent-gold) 55%, #a07010);
-  box-shadow: 0 4px 16px rgba(212, 168, 67, 0.35),
-              inset 0 1px 2px rgba(255, 255, 255, 0.25),
-              inset 0 -2px 4px rgba(0,0,0,0.2);
+  /* Outer rim ring */
+  outline: 3px solid #8a6a10;
+  outline-offset: -3px;
 
-  transition: background 0.4s ease, box-shadow 0.4s ease;
+  /* Default / neutral: aged brass */
+  background:
+    radial-gradient(circle at 30% 28%, #f0c84a 0%, #c89a20 40%, #8a6810 75%, #5a4408 100%);
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.45),
+    inset 0 2px 4px rgba(255, 230, 100, 0.4),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.35);
+
+  transition: background 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+}
+
+/* Inner ring decoration (concentric circle) */
+.coin::before {
+  content: '';
+  position: absolute;
+  inset: 8px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(255, 210, 60, 0.45);
+  pointer-events: none;
 }
 
 .coin-char {
-  font-size: 1.7rem;
+  font-size: 1.05rem;
   font-weight: 700;
   font-family: var(--font-cn);
-  color: #1a1a2e;
-  position: relative;
+  color: #2a1a00;
+  position: absolute;
   z-index: 2;
-  transition: color 0.4s ease;
   user-select: none;
+  letter-spacing: 0;
+  /* Distribute one char top-left, one bottom-right like traditional coin inscription */
 }
 
-/* Square hole in the center (traditional coin style) */
+/* Square hole in the center (traditional cash-coin style) */
 .coin-hole {
   position: absolute;
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   background: var(--bg-primary);
   border-radius: 2px;
-  transform: rotate(45deg);
-  z-index: 1;
+  z-index: 3;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.6);
 }
 
-/* === Yang coin (乾 — heads, bright gold) === */
+/* === Yang coin (乾 — heads, bright new brass) === */
 .coin.yang {
-  background: radial-gradient(circle at 38% 35%, #f8e080, var(--accent-gold) 55%, #a07010);
-  box-shadow: 0 4px 22px rgba(212, 168, 67, 0.55),
-              inset 0 1px 3px rgba(255, 255, 255, 0.35),
-              inset 0 -2px 4px rgba(0,0,0,0.15);
+  background:
+    radial-gradient(circle at 30% 28%, #ffe470 0%, #d4a820 35%, #9a7010 70%, #6a4c08 100%);
+  box-shadow:
+    0 5px 24px rgba(212, 168, 67, 0.6),
+    inset 0 2px 5px rgba(255, 240, 120, 0.5),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.25);
+  outline-color: #a88010;
 }
 
-.coin.yang .coin-char { color: #1a1a2e; }
+.coin.yang .coin-char { color: #1e1000; }
 
-/* === Yin coin (坤 — tails, dark) === */
+/* === Yin coin (坤 — tails, aged patina green-bronze) === */
 .coin.yin {
-  background: radial-gradient(circle at 38% 35%, #5a5278, #352f58 55%, #1a1530);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45),
-              inset 0 1px 2px rgba(255, 255, 255, 0.08),
-              inset 0 -2px 4px rgba(0,0,0,0.3);
+  background:
+    radial-gradient(circle at 30% 28%, #7a9a80 0%, #4a6e58 40%, #2e4a3a 70%, #1a2e26 100%);
+  box-shadow:
+    0 4px 16px rgba(0, 0, 0, 0.55),
+    inset 0 2px 4px rgba(160, 220, 160, 0.2),
+    inset 0 -3px 6px rgba(0, 0, 0, 0.4);
+  outline-color: #3a5040;
 }
 
-.coin.yin .coin-char { color: var(--text-secondary); }
+.coin.yin .coin-char { color: #c8e0c8; }
 
-.coin.yin .coin-hole { background: #1a1530; }
+.coin.yin .coin-hole { background: #121e18; }
+.coin.yin::before { border-color: rgba(160, 220, 160, 0.25); }
 
 /* === Flip animation === */
 .coin.flipping {

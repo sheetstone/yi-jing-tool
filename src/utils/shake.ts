@@ -13,7 +13,7 @@ export function useShakeDetector({ threshold = 15, cooldownMs = 1000, onShake }:
 
   const handleMotion = useCallback((event: DeviceMotionEvent) => {
     const acc = event.accelerationIncludingGravity;
-    if (!acc || !acc.x || !acc.y || !acc.z) return;
+    if (!acc || acc.x == null || acc.y == null || acc.z == null) return;
 
     const magnitude = Math.sqrt(acc.x ** 2 + acc.y ** 2 + acc.z ** 2);
 

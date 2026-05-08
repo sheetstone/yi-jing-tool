@@ -140,6 +140,31 @@
   line-height: 1.6;
 }
 
+/* 卜辞 supplement — sits inside the judgment block */
+.buci-supplement {
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px solid rgba(212, 168, 67, 0.15);
+}
+
+.buci-supplement-label {
+  display: inline-block;
+  font-size: 0.72rem;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 6px;
+  opacity: 0.75;
+}
+
+.buci-supplement-text {
+  font-size: 0.92rem;
+  color: var(--accent-gold);
+  opacity: 0.82;
+  line-height: 1.8;
+  font-style: italic;
+}
+
 /* === Classical Sections (大象, 卜辞, 推断) === */
 .classical-section {
   width: 100%;
@@ -307,6 +332,80 @@
   font-family: var(--font-en);
   font-style: italic;
   line-height: 1.6;
+}
+
+/* 推断 within a changing-line-card */
+.line-tuijuan {
+  margin-top: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(231, 76, 60, 0.12);
+}
+
+.line-tuijuan-label {
+  display: inline-block;
+  font-size: 0.7rem;
+  color: var(--changing-color);
+  letter-spacing: 2px;
+  font-weight: 600;
+  margin-bottom: 5px;
+  opacity: 0.75;
+}
+
+.line-tuijuan-text {
+  font-size: 0.88rem;
+  color: var(--text-primary);
+  line-height: 1.75;
+}
+
+/* Per-line fortune tabs */
+.line-fortune-section {
+  margin-top: 12px;
+  border-top: 1px solid rgba(231, 76, 60, 0.12);
+  padding-top: 10px;
+}
+
+.line-fortune-tabs {
+  display: flex;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(231, 76, 60, 0.2);
+  margin-bottom: 0;
+}
+
+.line-fortune-tab {
+  flex: 1;
+  padding: 7px 2px;
+  background: transparent;
+  border: none;
+  border-right: 1px solid rgba(231, 76, 60, 0.12);
+  color: var(--text-secondary);
+  font-family: var(--font-cn);
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  letter-spacing: 0.3px;
+}
+
+.line-fortune-tab:last-child { border-right: none; }
+
+.line-fortune-tab.active {
+  background: rgba(231, 76, 60, 0.1);
+  color: var(--changing-color);
+  font-weight: 600;
+}
+
+.line-fortune-tab:hover:not(.active) {
+  background: rgba(231, 76, 60, 0.05);
+  color: var(--text-primary);
+}
+
+.line-fortune-content {
+  padding: 12px 14px;
+  background: rgba(231, 76, 60, 0.03);
+  border: 1px solid rgba(231, 76, 60, 0.1);
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  min-height: 60px;
 }
 
 /* === New Reading Button === */

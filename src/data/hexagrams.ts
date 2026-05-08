@@ -1,4 +1,6 @@
 import type { Hexagram } from '../types';
+import { hexagramDivination } from './hexagramDivination';
+import { hexagramLineDivination } from './hexagramLineDivination';
 
 const _base: Hexagram[] = [
   // 1. 乾 (Qián) - The Creative
@@ -1219,7 +1221,14 @@ const _base: Hexagram[] = [
   },
 ];
 
-export const hexagrams: Hexagram[] = _base;
+export const hexagrams: Hexagram[] = _base.map(h => ({
+  ...h,
+  ...(hexagramDivination[h.number] ?? {}),
+  lines: h.lines.map(line => ({
+    ...line,
+    ...(hexagramLineDivination[h.number]?.[line.position] ?? {}),
+  })),
+}));
 
 export function hexagramLookupMap(): Map<string, Hexagram> {
   const map = new Map<string, Hexagram>();

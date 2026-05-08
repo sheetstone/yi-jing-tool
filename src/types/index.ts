@@ -10,6 +10,13 @@ export interface HexagramLine {
   position: number;
   textZh: string;
   textEn: string;
+  // Per-line divination content (populated for changing lines)
+  tuijuan?: BilingualText;
+  yunshi?: BilingualText;
+  aiqing?: BilingualText;
+  jibing?: BilingualText;
+  shiwu?: BilingualText;
+  susong?: BilingualText;
 }
 
 export interface BilingualText {

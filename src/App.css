@@ -47,28 +47,30 @@ body {
     var(--bg-primary);
 }
 
-/* === Language Toggle === */
+/* === Language Toggle (unobtrusive; reveals on hover) === */
 .lang-toggle {
   position: fixed;
-  top: 14px;
-  right: 16px;
+  top: 12px;
+  right: 14px;
   z-index: 200;
-  background: rgba(212, 168, 67, 0.08);
-  border: 1px solid rgba(212, 168, 67, 0.35);
-  color: var(--accent-gold);
-  padding: 5px 14px;
+  background: transparent;
+  border: 1px solid rgba(212, 168, 67, 0.15);
+  color: var(--text-secondary);
+  padding: 3px 10px;
   border-radius: 20px;
-  font-size: 0.8rem;
+  font-size: 0.72rem;
   font-family: var(--font-cn);
   cursor: pointer;
   transition: all 0.3s ease;
   letter-spacing: 1px;
-  backdrop-filter: blur(4px);
+  opacity: 0.35;
 }
 
 .lang-toggle:hover {
-  background: rgba(212, 168, 67, 0.2);
-  border-color: var(--accent-gold);
+  opacity: 1;
+  background: rgba(212, 168, 67, 0.1);
+  border-color: rgba(212, 168, 67, 0.5);
+  color: var(--accent-gold);
 }
 
 /* Shared button styles */
