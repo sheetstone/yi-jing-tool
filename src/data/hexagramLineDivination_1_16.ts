@@ -217,3 +217,4 @@ export const hexagramLineDivination_1_16: Record<number, Record<number, LineDivi
       susong: { zh: '诉讼以适度手段为佳，过激起诉反遭反制，适可而止。', en: 'In litigation, a measured approach is best. Pressing too hard invites counterattack — know when enough is enough.' },
     },
   },
+};
