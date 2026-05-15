@@ -2,6 +2,7 @@ import { useState, useCallback, useRef, useEffect } from 'react';
 import type { TossLine, LineType } from '../types';
 import { performSingleToss } from '../utils/divination';
 import { useShakeDetector } from '../utils/shake';
+import { playShakeSound } from '../utils/sound';
 import { useLang } from '../contexts/LangContext';
 import HexagramBuilder from './HexagramBuilder';
 import CoinToss from './CoinToss';
@@ -68,6 +69,7 @@ export default function DivinationScreen({ onComplete, onBack }: DivinationScree
 
   const handleToss = useCallback(() => {
     if (isAnimating || currentToss > 6) return;
+    playShakeSound();
     setIsAnimating(true);
     setShowLineInfo(false);
     setTimeout(() => {
