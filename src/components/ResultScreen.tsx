@@ -3,6 +3,7 @@ import type { TossLine } from '../types';
 import { computeDivinationResult, resultToYangLine, getLineType } from '../utils/divination';
 import { useLang } from '../contexts/LangContext';
 import HexagramDiagram from './HexagramDiagram';
+import AdBanner from './AdBanner';
 import './ResultScreen.css';
 
 interface ResultScreenProps {
@@ -251,6 +252,9 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
             </div>
           </div>
         )}
+
+        {/* Ad — replace XXXXXXXXXX with your ad unit slot ID from AdSense */}
+        <AdBanner adSlot="2883677619" style={{ margin: '8px 0' }} />
 
         {/* New Reading Button */}
         <button className="btn-primary new-reading-btn" onClick={onNewReading}>

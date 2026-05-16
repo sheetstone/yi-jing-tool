@@ -1,14 +1,11 @@
-import type { BilingualText } from '../types';
+import { hexagramLineDivination_1_16 } from './hexagramLineDivination_1_16';
+import { hexagramLineDivination_batch2 } from './hexagramLineDivination_33_42';
+import { hexagramLineDivination_43_54 } from './hexagramLineDivination_43_54';
+import { hexagramLineDivination_55_64 } from './hexagramLineDivination_55_64';
 
-interface LineDivination {
-  tuijuan: BilingualText;
-  yunshi: BilingualText;
-  aiqing: BilingualText;
-  jibing: BilingualText;
-  shiwu: BilingualText;
-  susong: BilingualText;
-}
-
-// Outer key: hexagram number (1–64)
-// Inner key: line position (1–6)
-export const hexagramLineDivination: Record<number, Record<number, LineDivination>> = {};
+export const hexagramLineDivination = {
+  ...hexagramLineDivination_1_16,
+  ...hexagramLineDivination_batch2,
+  ...hexagramLineDivination_43_54,
+  ...hexagramLineDivination_55_64,
+};
