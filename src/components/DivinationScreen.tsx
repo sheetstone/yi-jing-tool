@@ -1,6 +1,6 @@
 import { useState, useCallback, useRef, useEffect } from 'react';
 import type { TossLine, LineType } from '../types';
-import { performSingleToss } from '../utils/divination';
+import { performSingleToss } from '../utils/divination-toss';
 import { useShakeDetector } from '../utils/shake';
 import { playShakeSound } from '../utils/sound';
 import { useLang } from '../contexts/LangContext';

@@ -408,8 +408,41 @@
   min-height: 60px;
 }
 
-/* === New Reading Button === */
-.new-reading-btn { margin-top: 20px; }
+/* === Action buttons row === */
+.result-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.save-reading-btn {
+  width: 100%;
+  max-width: 320px;
+  padding: 14px 24px;
+  background: transparent;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  border-radius: 8px;
+  font-family: var(--font-cn);
+  font-size: 1rem;
+  letter-spacing: 3px;
+  cursor: pointer;
+  transition: background 0.2s, opacity 0.2s;
+}
+
+.save-reading-btn:hover:not(:disabled) {
+  background: rgba(212, 168, 67, 0.08);
+}
+
+.save-reading-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.new-reading-btn { width: 100%; max-width: 320px; }
 
 .fade-in { animation: fadeInUp 0.4s ease-out; }
 

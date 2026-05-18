@@ -1,5 +1,5 @@
 import type { TossLine } from '../types';
-import { resultToYangLine } from '../utils/divination';
+import { resultToYangLine } from '../utils/divination-toss';
 import { useLang } from '../contexts/LangContext';
 
 interface HexagramBuilderProps {

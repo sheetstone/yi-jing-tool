@@ -32,59 +32,59 @@ Prompt to resume any session:
 - [x] 12. 否 (Pǐ) — Standstill
 - **File:** `hexagramLineDivination_1_16.ts`
 
-### Session 3 — Hexagrams 13–16
-- [ ] 13. 同人 (Tóng Rén) — Fellowship
-- [ ] 14. 大有 (Dà Yǒu) — Great Possession
-- [ ] 15. 谦 (Qiān) — Modesty
-- [ ] 16. 豫 (Yù) — Enthusiasm
+### ✅ Session 3 — Hexagrams 13–16
+- [x] 13. 同人 (Tóng Rén) — Fellowship
+- [x] 14. 大有 (Dà Yǒu) — Great Possession
+- [x] 15. 谦 (Qiān) — Modesty
+- [x] 16. 豫 (Yù) — Enthusiasm
 - **File:** `hexagramLineDivination_1_16.ts`
 
-### Session 4 — Hexagrams 17–20
-- [ ] 17. 随 (Suí) — Following
-- [ ] 18. 蛊 (Gǔ) — Work on the Decayed
-- [ ] 19. 临 (Lín) — Approach
-- [ ] 20. 观 (Guān) — Contemplation
-- **File:** new `hexagramLineDivination_17_32.ts`
-
-### Session 5 — Hexagrams 21–24
-- [ ] 21. 噬嗑 (Shì Kè) — Biting Through
-- [ ] 22. 贲 (Bì) — Grace
-- [ ] 23. 剥 (Bō) — Splitting Apart
-- [ ] 24. 复 (Fù) — Return
+### ✅ Session 4 — Hexagrams 17–20
+- [x] 17. 随 (Suí) — Following
+- [x] 18. 蛊 (Gǔ) — Work on the Decayed
+- [x] 19. 临 (Lín) — Approach
+- [x] 20. 观 (Guān) — Contemplation
 - **File:** `hexagramLineDivination_17_32.ts`
 
-### Session 6 — Hexagrams 25–28
-- [ ] 25. 无妄 (Wú Wàng) — Innocence
-- [ ] 26. 大畜 (Dà Chù) — Great Taming
-- [ ] 27. 颐 (Yí) — Nourishment
-- [ ] 28. 大过 (Dà Guò) — Great Excess
+### ✅ Session 5 — Hexagrams 21–24
+- [x] 21. 噬嗑 (Shì Kè) — Biting Through
+- [x] 22. 贲 (Bì) — Grace
+- [x] 23. 剥 (Bō) — Splitting Apart
+- [x] 24. 复 (Fù) — Return
 - **File:** `hexagramLineDivination_17_32.ts`
 
-### Session 7 — Hexagrams 29–32
-- [ ] 29. 坎 (Kǎn) — The Abysmal Water
-- [ ] 30. 离 (Lí) — The Clinging Fire
-- [ ] 31. 咸 (Xián) — Influence
-- [ ] 32. 恒 (Héng) — Duration
+### ✅ Session 6 — Hexagrams 25–28
+- [x] 25. 无妄 (Wú Wàng) — Innocence
+- [x] 26. 大畜 (Dà Chù) — Great Taming
+- [x] 27. 颐 (Yí) — Nourishment
+- [x] 28. 大过 (Dà Guò) — Great Excess
 - **File:** `hexagramLineDivination_17_32.ts`
 
-### Session 8 — Hexagrams 49–52
-- [ ] 49. 革 (Gé) — Revolution
-- [ ] 50. 鼎 (Dǐng) — The Cauldron
-- [ ] 51. 震 (Zhèn) — The Arousing Thunder
-- [ ] 52. 艮 (Gèn) — Keeping Still
+### ✅ Session 7 — Hexagrams 29–32
+- [x] 29. 坎 (Kǎn) — The Abysmal Water
+- [x] 30. 离 (Lí) — The Clinging Fire
+- [x] 31. 咸 (Xián) — Influence
+- [x] 32. 恒 (Héng) — Duration
+- **File:** `hexagramLineDivination_17_32.ts`
+
+### ✅ Session 8 — Hexagrams 49–52
+- [x] 49. 革 (Gé) — Revolution
+- [x] 50. 鼎 (Dǐng) — The Cauldron
+- [x] 51. 震 (Zhèn) — The Arousing Thunder
+- [x] 52. 艮 (Gèn) — Keeping Still
 - **File:** `hexagramLineDivination_43_54.ts`
 
-### Session 9 — Hexagrams 53–54 + 60–62
-- [ ] 53. 渐 (Jiàn) — Development
-- [ ] 54. 归妹 (Guī Mèi) — The Marrying Maiden
-- [ ] 60. 节 (Jié) — Limitation
-- [ ] 61. 中孚 (Zhōng Fú) — Inner Truth
-- [ ] 62. 小过 (Xiǎo Guò) — Small Excess
+### ✅ Session 9 — Hexagrams 53–54 + 60–62
+- [x] 53. 渐 (Jiàn) — Development
+- [x] 54. 归妹 (Guī Mèi) — The Marrying Maiden
+- [x] 60. 节 (Jié) — Limitation
+- [x] 61. 中孚 (Zhōng Fú) — Inner Truth
+- [x] 62. 小过 (Xiǎo Guò) — Small Excess
 - **File:** `hexagramLineDivination_43_54.ts` (53–54), `hexagramLineDivination_55_64.ts` (60–62)
 
-### Session 10 — Hexagrams 63–64
-- [ ] 63. 既济 (Jì Jì) — After Completion
-- [ ] 64. 未济 (Wèi Jì) — Before Completion
+### ✅ Session 10 — Hexagrams 63–64
+- [x] 63. 既济 (Jì Jì) — After Completion
+- [x] 64. 未济 (Wèi Jì) — Before Completion
 - **File:** `hexagramLineDivination_55_64.ts`
 
 ---

@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Full dark background (maskable safe zone) -->
+  <rect width="512" height="512" fill="#1a1a2e"/>
+
+  <!-- Outer octagon frame (八卦外框) -->
+  <polygon
+    points="256,62 355,96 436,176 436,336 355,416 256,450 157,416 76,336 76,176 157,96"
+    fill="none" stroke="#d4a843" stroke-width="2.5" opacity="0.32"
+  />
+
+  <!-- Background circle -->
+  <circle cx="256" cy="256" r="174" fill="#12122a"/>
+
+  <!-- Taijitu: yang (gold) on RIGHT, yin (dark) on LEFT                   -->
+  <!-- Path: start top, arc right side down, S-curve back up               -->
+  <path d="M 256,82
+           a 174,174 0 0,1 0,348
+           a 87,87   0 0,0 0,-174
+           a 87,87   0 0,1 0,-174
+           Z"
+        fill="#d4a843"/>
+
+  <!-- Yin dot in yang area (top, right half) at (256, 169) — draw DARK -->
+  <circle cx="256" cy="169" r="33" fill="#12122a"/>
+
+  <!-- Yang dot in yin area (bottom, left half) at (256, 343) — draw GOLD -->
+  <circle cx="256" cy="343" r="33" fill="#d4a843"/>
+
+  <!-- Gold border ring -->
+  <circle cx="256" cy="256" r="174" fill="none" stroke="#d4a843" stroke-width="5.5" opacity="0.95"/>
+
+  <!-- Subtle glow rings -->
+  <circle cx="256" cy="256" r="194" fill="none" stroke="#d4a843" stroke-width="1.5" opacity="0.2"/>
+  <circle cx="256" cy="256" r="204" fill="none" stroke="#d4a843" stroke-width="1"   opacity="0.1"/>
+</svg>

@@ -1,5 +1,5 @@
 import type { TossLine } from '../types';
-import { resultToYangLine } from '../utils/divination';
+import { resultToYangLine } from '../utils/divination-toss';
 
 interface HexagramDiagramProps {
   tossLines: TossLine[];

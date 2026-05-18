@@ -1,0 +1,196 @@
+.date-display-card {
+  width: 100%;
+  padding: 22px 20px 18px;
+  background: var(--bg-card);
+  border-radius: 16px;
+  border: 1px solid rgba(212, 168, 67, 0.18);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+
+/* ── Gregorian date ─────────────────────────────────────────────────────── */
+.solar-date-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.solar-year {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 2px;
+}
+
+.solar-month,
+.solar-day {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+}
+
+.solar-weekday {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+}
+
+.solar-sep {
+  display: inline-block;
+  width: 1px;
+  height: 14px;
+  background: rgba(212, 168, 67, 0.25);
+  margin: 0 2px;
+  vertical-align: middle;
+}
+
+/* ── Lunar row ──────────────────────────────────────────────────────────── */
+.lunar-date-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+}
+
+.lunar-gz-year {
+  font-weight: 600;
+  color: rgba(212, 168, 67, 0.75);
+  letter-spacing: 1px;
+}
+
+.lunar-dot {
+  color: rgba(212, 168, 67, 0.35);
+  font-size: 0.75rem;
+}
+
+.lunar-md { letter-spacing: 0.5px; }
+
+/* ── Divider ────────────────────────────────────────────────────────────── */
+.date-hr {
+  width: 100%;
+  height: 1px;
+  background: rgba(212, 168, 67, 0.1);
+}
+
+/* ── 八字 ───────────────────────────────────────────────────────────────── */
+.bazi-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bazi-header {
+  font-size: 0.75rem;
+  color: rgba(212, 168, 67, 0.55);
+  letter-spacing: 4px;
+  font-weight: 600;
+}
+
+.bazi-pillars {
+  display: flex;
+  width: 100%;
+  justify-content: space-around;
+}
+
+.bazi-pillar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.pillar-label {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.pillar-gz {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--accent-gold);
+  letter-spacing: 3px;
+  line-height: 1.2;
+}
+
+.pillar-el {
+  font-size: 0.72rem;
+  letter-spacing: 3px;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
+/* ── 五行 ───────────────────────────────────────────────────────────────── */
+.wuxing-section {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wuxing-title {
+  font-size: 0.75rem;
+  color: rgba(212, 168, 67, 0.55);
+  letter-spacing: 2px;
+  white-space: nowrap;
+  font-weight: 600;
+}
+
+.wuxing-bars {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.wuxing-item {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.wuxing-char {
+  font-size: 0.82rem;
+  font-weight: 700;
+  width: 14px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.wuxing-track {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.wuxing-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.6s ease;
+  opacity: 0.85;
+}
+
+.wuxing-cnt {
+  font-size: 0.72rem;
+  width: 10px;
+  text-align: right;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+@media (max-width: 380px) {
+  .pillar-gz { font-size: 1.15rem; letter-spacing: 2px; }
+  .solar-year { font-size: 1.1rem; }
+}

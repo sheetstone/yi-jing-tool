@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { lazy, Suspense, useState } from 'react'
 import './App.css'
 import type { AppScreen, TossLine } from './types'
 import { useLang } from './contexts/LangContext'
 import StartScreen from './components/StartScreen'
 import DivinationScreen from './components/DivinationScreen'
-import ResultScreen from './components/ResultScreen'
+
+const ResultScreen = lazy(() => import('./components/ResultScreen'))
 
 function App() {
   const [screen, setScreen] = useState<AppScreen>('start')
@@ -35,10 +36,12 @@ function App() {
         />
       )}
       {screen === 'result' && tossLines && (
-        <ResultScreen
-          tossLines={tossLines}
-          onNewReading={handleNewReading}
-        />
+        <Suspense fallback={null}>
+          <ResultScreen
+            tossLines={tossLines}
+            onNewReading={handleNewReading}
+          />
+        </Suspense>
       )}
     </div>
   )
