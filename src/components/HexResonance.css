@@ -1,0 +1,118 @@
+.hex-resonance {
+  width: 100%;
+  padding: 14px 16px;
+  background: rgba(212, 168, 67, 0.04);
+  border-radius: 10px;
+  border: 1px solid rgba(212, 168, 67, 0.12);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.hex-resonance--secondary {
+  background: rgba(122, 106, 90, 0.06);
+  border-color: rgba(122, 106, 90, 0.15);
+}
+
+/* ── Header ───────────────────────────────────────────────────────────────── */
+.hre-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hre-title {
+  font-size: 0.72rem;
+  color: rgba(212, 168, 67, 0.55);
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+
+.hre-wx-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid currentColor;
+  opacity: 0.85;
+}
+
+/* ── Element flow ─────────────────────────────────────────────────────────── */
+.hre-flow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+}
+
+.hre-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  min-width: 44px;
+}
+
+.hre-chip-el {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.hre-chip-sub {
+  font-size: 0.64rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  opacity: 0.7;
+}
+
+.hre-chip-lower {
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  margin-top: -2px;
+}
+
+/* Relationship center column */
+.hre-rel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.hre-rel-sym {
+  font-size: 1.1rem;
+  color: rgba(212, 168, 67, 0.45);
+  line-height: 1;
+}
+
+.hre-rel-label {
+  font-size: 0.68rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ── Description ──────────────────────────────────────────────────────────── */
+.hre-desc {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  border-top: 1px solid rgba(212, 168, 67, 0.08);
+  padding-top: 8px;
+  margin: 0;
+}
+
+.hex-resonance--secondary .hre-desc {
+  border-top-color: rgba(122, 106, 90, 0.12);
+}
+
+@media (max-width: 380px) {
+  .hre-chip-el { font-size: 1.4rem; }
+  .hre-desc    { font-size: 0.78rem; }
+}

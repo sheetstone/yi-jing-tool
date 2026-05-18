@@ -5,7 +5,12 @@ import { useLang } from '../contexts/LangContext';
 import HexagramDiagram from './HexagramDiagram';
 import AdBanner from './AdBanner';
 import DateDisplay, { useReadingDate } from './DateDisplay';
+import HexResonance from './HexResonance';
+import { calcHexResonance } from '../utils/hexResonance';
 import { shareOrDownload } from '../utils/shareImage';
+import { getFieldModifier } from '../utils/hexResonanceModifiers';
+import type { ModifiableField } from '../utils/hexResonanceModifiers';
+import { getChangingLineNaJia } from '../utils/naJia';
 import './ResultScreen.css';
 
 interface ResultScreenProps {
@@ -24,8 +29,8 @@ const TRANSFORMED_EXPLANATION = {
 };
 
 const CHANGING_EXPLANATION = {
-  zh: '变爻是占问中出现的老阳（九，三枚全正）或老阴（六，三枚全反）的爻。阳极必变阴，阴极必变阳，此乃易道之核心。变爻是本次占问中最需关注的爻辞，代表当下最活跃的转化力量。若有变爻，则以变卦为最终归宿，变卦揭示事态发展的方向。',
-  en: "Changing lines arise when all three coins show heads (老阳=9) or all three tails (老阴=6). Yang at its peak transforms to yin; yin at its peak transforms to yang — this is the heart of the I Ching's teaching on change. Changing lines carry the most urgent message in a reading. When present, the transformed hexagram reveals the outcome and direction of events.",
+  zh: '变爻是占问中出现的老阳（九，三枚全正）或老阴（六，三枚全反）的爻。阳极必变阴，阴极必变阳，此乃易道之核心。变爻是本次占问中最需关注的爻辞，代表当下最活跃的转化力量。若有变爻，则以变卦为最终归宿，变卦揭示事态发展的方向。\n\n各变爻的干支依纳甲法推算：根据该爻所在上/下卦及爻位，对应特定天干地支，其天干五行与占卜日干五行的生克关系，即决定此爻「今日得力／受制／平和」。',
+  en: "Changing lines arise when all three coins show heads (老阳=9) or all three tails (老阴=6). Yang at its peak transforms to yin; yin at its peak transforms to yang — this is the heart of the I Ching's teaching on change. Changing lines carry the most urgent message in a reading. When present, the transformed hexagram reveals the outcome and direction of events.\n\nEach line's ganzhi (干支) is assigned via the Nà-Jiǎ (纳甲) method — an ancient technique from Han-dynasty I Ching study. The stem's five-element interacts with the day stem's element to determine whether this changing line is aided, restrained, or balanced by today's energy.",
 };
 
 const FORTUNE_TABS = [
@@ -44,6 +49,16 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
   const { primaryHexagram, transformedHexagram } = result;
 
   const readingDate = useReadingDate();
+  const primaryResonance = useMemo(
+    () => calcHexResonance(primaryHexagram.upperTrigram, primaryHexagram.lowerTrigram, readingDate),
+    [primaryHexagram, readingDate],
+  );
+  const transformedResonance = useMemo(
+    () => transformedHexagram
+      ? calcHexResonance(transformedHexagram.upperTrigram, transformedHexagram.lowerTrigram, readingDate)
+      : null,
+    [transformedHexagram, readingDate],
+  );
   const [activeTab, setActiveTab] = useState<FortuneTab>('yunshi');
   const [transformedActiveTab, setTransformedActiveTab] = useState<FortuneTab>('yunshi');
   const [showPrimaryInfo, setShowPrimaryInfo] = useState(false);
@@ -118,6 +133,9 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
             showChanging={true}
           />
 
+          {/* 今日卦运 resonance card */}
+          <HexResonance data={primaryResonance} lang={lang} />
+
           {/* 卦辞 + 卜辞 supplement */}
           <div className="judgment-section">
             <h4 className="section-label">{t('卦辞', 'Judgment')}</h4>
@@ -147,6 +165,10 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
               <h4 className="section-label">{t('推断', 'Interpretation')}</h4>
               {lang === 'zh' && <p className="classical-zh">{primaryHexagram.tuijuan.zh}</p>}
               {lang === 'en' && <p className="classical-en">{primaryHexagram.tuijuan.en}</p>}
+              {(() => {
+                const mod = getFieldModifier(primaryResonance, 'tuijuan', lang);
+                return mod ? <p className="field-modifier">{mod}</p> : null;
+              })()}
             </div>
           )}
 
@@ -169,6 +191,10 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
                   <>
                     {lang === 'zh' && <p className="fortune-zh">{activeFortuneData.zh}</p>}
                     {lang === 'en' && <p className="fortune-en">{activeFortuneData.en}</p>}
+                    {(() => {
+                      const mod = getFieldModifier(primaryResonance, activeTab as ModifiableField, lang);
+                      return mod ? <p className="field-modifier">{mod}</p> : null;
+                    })()}
                   </>
                 ) : (
                   <p className="fortune-empty">{t('暂无此项内容', 'No data available')}</p>
@@ -214,6 +240,25 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
                         : t('老阴 → 阳', 'Old Yin → Yang')}
                     </span>
                   </div>
+
+                  {/* 纳甲爻位干支 + 今日状态 */}
+                  {(() => {
+                    const nj = getChangingLineNaJia(
+                      primaryHexagram.upperTrigram,
+                      primaryHexagram.lowerTrigram,
+                      pos,
+                      readingDate,
+                    );
+                    const stateLabel = lang === 'zh'
+                      ? (nj.state === 'assisted' ? '今日得力' : nj.state === 'restrained' ? '今日受制' : '今日平和')
+                      : (nj.state === 'assisted' ? 'Aided Today' : nj.state === 'restrained' ? 'Restrained' : 'Balanced');
+                    return (
+                      <div className="naJia-bar">
+                        <span className="naJia-ganzhi">{nj.ganzhi}·{nj.element}</span>
+                        <span className={`naJia-tag naJia-${nj.state}`}>{stateLabel}</span>
+                      </div>
+                    );
+                  })()}
 
                   {/* 爻辞 */}
                   {lang === 'zh' && <p className="changing-text-zh">{line.textZh}</p>}
@@ -300,6 +345,11 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
               showChanging={false}
             />
 
+            {/* 变卦今日卦运 */}
+            {transformedResonance && (
+              <HexResonance data={transformedResonance} lang={lang} secondary />
+            )}
+
             <div className="judgment-section">
               {lang === 'zh' && <p className="judgment-zh">{transformedHexagram.judgmentZh}</p>}
               {lang === 'en' && <p className="judgment-en">{transformedHexagram.judgmentEn}</p>}
@@ -325,6 +375,10 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
                 <h4 className="section-label">{t('推断', 'Interpretation')}</h4>
                 {lang === 'zh' && <p className="classical-zh">{transformedHexagram.tuijuan.zh}</p>}
                 {lang === 'en' && <p className="classical-en">{transformedHexagram.tuijuan.en}</p>}
+                {transformedResonance && (() => {
+                  const mod = getFieldModifier(transformedResonance, 'tuijuan', lang);
+                  return mod ? <p className="field-modifier">{mod}</p> : null;
+                })()}
               </div>
             )}
 
@@ -346,6 +400,10 @@ export default function ResultScreen({ tossLines, onNewReading }: ResultScreenPr
                     <>
                       {lang === 'zh' && <p className="fortune-zh">{transformedHexagram[transformedActiveTab]!.zh}</p>}
                       {lang === 'en' && <p className="fortune-en">{transformedHexagram[transformedActiveTab]!.en}</p>}
+                      {transformedResonance && (() => {
+                        const mod = getFieldModifier(transformedResonance, transformedActiveTab as ModifiableField, lang);
+                        return mod ? <p className="field-modifier">{mod}</p> : null;
+                      })()}
                     </>
                   ) : (
                     <p className="fortune-empty">{t('暂无此项内容', 'No data available')}</p>

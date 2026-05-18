@@ -444,6 +444,46 @@
 
 .new-reading-btn { width: 100%; max-width: 320px; }
 
+/* === 纳甲爻 bar === */
+.naJia-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+.naJia-ganzhi {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  letter-spacing: 1px;
+  opacity: 0.75;
+}
+
+.naJia-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  padding: 2px 7px;
+  border-radius: 4px;
+  border: 1px solid currentColor;
+}
+
+.naJia-assisted   { color: rgba(212, 168, 67, 0.9);  }
+.naJia-restrained { color: rgba(180,  70,  60, 0.85); }
+.naJia-neutral    { color: rgba(150, 140, 125, 0.7);  }
+
+/* === field-modifier (Batch 2) === */
+.field-modifier {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  border-left: 2px solid rgba(212, 168, 67, 0.25);
+  padding-left: 10px;
+  margin-top: 10px;
+  line-height: 1.7;
+  font-style: italic;
+}
+
 .fade-in { animation: fadeInUp 0.4s ease-out; }
 
 /* === Responsive === */
